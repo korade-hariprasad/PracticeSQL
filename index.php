@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+$_SESSION['showPages'] = 0;
+
 $conn = mysqli_connect('localhost', 'root', '', 'practice_sql');
 
 if(isset($_POST['l_submit']))   login($_POST['l_name'], $_POST['l_pass'], $conn);
@@ -29,6 +32,10 @@ function login($name, $pass, $conn){
     if(!checkName($name, $conn)){
         $q = "SELECT pass FROM login WHERE uname='$name';";
         if(mysqli_fetch_array(mysqli_query($conn, $q))['pass']==$pass){
+            $q="SELECT uid FROM login WHERE uname='$name'";
+            $r = mysqli_query($conn, $q);
+            $_SESSION['showPages'] = 1;
+            $_SESSION['uid'] = mysqli_fetch_assoc($r)['uid'];
             header('location:home.php');
         }else
             showAlert("Incorrect Password for user $name");
@@ -39,14 +46,27 @@ function login($name, $pass, $conn){
 function register($name, $pass, $conn){
     if(checkName($name, $conn)){
         $q = "INSERT INTO login (uname, pass) VALUES ('$name', '$pass');";
-        if(mysqli_query($conn, $q)) showAlert("User Created, please login again to continue.");
+        if(mysqli_query($conn, $q)){
+            //create user with his username
+            $q = "CREATE USER '$name'@'localhost' IDENTIFIED BY '$pass';";
+            if(mysqli_query($conn, $q)){
+                //create a database with username
+                $q = "CREATE DATABASE $name;";
+                if(mysqli_query($conn, $q)){
+                    //grant permissions to user for his database only
+                    $q = "GRANT ALL PRIVILEGES ON $name.* TO '$name'@localhost WITH GRANT OPTION;";
+                    mysqli_query($conn, $q);
+                    $q = "FLUSH PRIVILEGES";
+                    mysqli_query($conn, $q);
+                }
+            }
+            showAlert("User Created, please login again to continue.");
+        }
     }else
         showAlert("Username already exists, please select another username");
 }
 
-function showAlert($msg){
-    echo "<script>window.alert('$msg');</script>";
-}
+function showAlert($msg){    echo "<script>window.alert('$msg');</script>"; }
 
 function checkName($name, $conn){
     $q = "SELECT uname FROM login;";
