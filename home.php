@@ -52,58 +52,57 @@
         </ol> -->
             </nav>
         </div><!-- End Page Title -->
+        <!-- 
+        <section class="section"> -->
+        <div class="row">
+            <div class="col-lg-6">
 
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-6">
-
-                    <div class="card">
-                        
+                <div class="card">
+                    <form>
                         <div class="card-body">
-                            <h5 class="card-title">PracticeSQL  <a href="" type="button" class="btn btn-primary">RUN</a></h5>
+                            <h5 class="card-title">PracticeSQL <a href="" type="button" class="btn btn-primary"
+                                    style="float : right">RUN</a></h5>
 
+                            <div class="row mb-12">
 
-                            <!-- General Form Elements -->
-                            <form>
-                                <div class="row mb-12">
-
-                                    <div class="col-sm-12">
-                                        <textarea class="form-control" style="height: 400px"></textarea>
-                                    </div>
-
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" style="height: 400px"></textarea>
                                 </div>
-                            </form><!-- End General Form Elements -->
+
+                            </div>
 
                         </div>
-                       
-                    </div>
-                  
+                    </form>
 
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Output</h5>
-
-                            <!-- General Form Elements -->
-                            <form>
-                                <div class="row mb-12" readonly>
-
-                                    <div class="col-sm-12">
-                                        <textarea class="form-control" style="height: 400px"></textarea>
-                                    </div>
-                                </div>
-                            </form><!-- End General Form Elements -->
-
-                        </div>
-                    </div>
 
                 </div>
 
 
             </div>
-        </section>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Output</h5>
+
+                        <!-- General Form Elements -->
+                        <form>
+                            <div class="row mb-12" readonly>
+
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" style="height: 400px"></textarea>
+                                </div>
+                            </div>
+                        </form><!-- End General Form Elements -->
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- </section> -->
 
     </main><!-- End #main -->
 
